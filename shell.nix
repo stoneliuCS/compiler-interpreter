@@ -8,4 +8,7 @@ mkShell {
     gtk2-x11
     clang
   ];
+  nativeBuildInputs = with pkgs; [
+    pkg-config
+  ];
 }
