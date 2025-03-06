@@ -4,5 +4,6 @@
 
 int main(int argc, char* argv[]) {
   // Read the file
+  printf("HELLO WORLD");
   return 0;
 }
