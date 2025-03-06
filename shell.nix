@@ -4,5 +4,8 @@ mkShell {
   buildInputs = [
     nixpkgs-fmt
     cunit
+    glib
+    gtk2-x11
+    clang
   ];
 }
