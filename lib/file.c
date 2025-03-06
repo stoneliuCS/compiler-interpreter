@@ -4,9 +4,12 @@
 #include <string.h>
 #include <glib.h>
 
-int readFile(const char* filePath) {
+// reads the file from the given filePath, returning a dynamically sized array.
+// The client caller is responsible for freeing the the memory allocated by this function.
+GArray* readFile(const char* filePath) {
 
   FILE *file_ptr;
+  GArray* vector = g_array_new(FALSE, FALSE, sizeof(guint));
   char ch;
   file_ptr = fopen(filePath, "r");
 
@@ -16,6 +19,11 @@ int readFile(const char* filePath) {
   }
 
   while ((ch = fgetc(file_ptr)) != EOF) {
-
+    g_array_append_val(vector, ch);
   }
+
+  fclose(file_ptr);
+
+  return vector;
+
 }
