@@ -7,3 +7,13 @@ Run the nix shell by using:
 ```bash
 nix develop # In the root directory
 ```
+
+Compile the interpreter into an executable object file using:
+```bash
+make
+```
+
+Run the executable by supplying command line arguments like so:
+```bash
+./main.o <FILE_PATH> # Or no arguments to run it in REPL mode.
+```
