@@ -3,10 +3,11 @@
 #include <string.h>
 #include "file.h"
 #include <glib.h>
+#include "repl.h"
 
 int main(int argc, char* argv[]) {
   if (argc == 1) {
-    printf("starting repl...\n");
+    runRepl();
   } else if (argc == 2) {
     printf("Compiling\n");
     const char* filePath = argv[1];

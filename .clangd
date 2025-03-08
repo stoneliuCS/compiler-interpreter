@@ -2,5 +2,6 @@ CompileFlags:
   Add: [
     "-I/nix/store/xxm1si4lrh7yvv8rmysylj7djfxhqqp4-glib-2.82.4-dev/include/glib-2.0",
     "-I/nix/store/2cmfr0y5s1wdyrv3jm5ckp8r56jvl6xa-glib-2.82.4/lib/glib-2.0/include",
-    "-I./lib/"
+    "-I./lib/",
+    "-I./frontend/"
   ]
