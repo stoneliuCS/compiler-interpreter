@@ -10,7 +10,7 @@ typedef struct AST_NODE {
 } AST_NODE;
 
 typedef struct BIN_AST {
-  struct NODE* node;
+  struct AST_NODE* node;
   struct BIN_AST* left;
   struct BIN_AST* right;
 } BIN_AST;
