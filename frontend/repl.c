@@ -13,7 +13,7 @@ void runRepl() {
   while (true) {
     char* line = NULL;
     size_t size;
-    printf("> ");
+    printf(">>> ");
     if (getline(&line, &size, stdin)) {
       if (handle_exits(line)) {
         free(line);
