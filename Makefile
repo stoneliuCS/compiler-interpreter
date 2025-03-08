@@ -1,6 +1,6 @@
 # BEGIN GLIB LINKING
-CFLAGS = $(shell pkg-config --cflags glib-2.0)
-LFLAGS = $(shell pkg-config --libs glib-2.0)
+CFLAGS = $(shell pkg-config --cflags glib-2.0) $(shell pkg-config --cflags cunit)
+LFLAGS = $(shell pkg-config --libs glib-2.0) $(shell pkg-config --libs cunit)
 
 # BEGIN USER DEFINED LINKS TO HEADERS
 LIB_FLAGS = -I/$(CURDIR)/lib
@@ -11,11 +11,15 @@ UFLAGS = $(LIB_FLAGS) $(FRONTEND_FLAGS)
 LIB = $(CURDIR)/lib/*.c
 FRONTEND = $(CURDIR)/frontend/*.c
 SOURCE = main.c $(LIB) $(FRONTEND)
+TEST = $(CURDIR)/tests/frontend/*.c
 
 all: compile
 
 compile:
 	gcc $(CFLAGS) $(UFLAGS) $(SOURCE) -o main.o $(LFLAGS)
+
+test:
+	gcc $(CFLAGS) $(UFLAGS) $(TEST) -o test.o $(LFLAGS)
 
 clean:
 	rm -rf main.o
