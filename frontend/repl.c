@@ -8,7 +8,6 @@
 
 static bool handle_exits(char *line);
 
-// Runs the interactive repl until the exit.
 void run_repl() {
   printf("StoneScript v0.1 \n");
   while (true) {
