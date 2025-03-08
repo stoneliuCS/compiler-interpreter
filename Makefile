@@ -1,4 +1,7 @@
+CFLAGS = $(shell pkg-config --cflags glib-2.0)
+LFLAGS = $(shell pkg-config --libs glib-2.0)
+
 all: compile
 
 compile:
-	gcc $(pkg-config --cflags --libs glib-2.0) main.c
+	gcc $(CFLAGS) main.c -o main.o
