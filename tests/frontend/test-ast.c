@@ -4,10 +4,12 @@
 #include <CUnit/CUnit.h>
 
 static void test_create_ast(void) {
-  BIN_AST *ast = create_bin_ast(&(AST_NODE){ 
+  AST_NODE node = {
     .type = AST_INTEGER,
     .val = '1'
-  });
+  };
+  AST_NODE* node_ptr = &node;
+  BIN_AST *ast = create_bin_ast(node_ptr);
   CU_ASSERT(ast != NULL);
   CU_ASSERT(ast->node->val == '1');
 }
