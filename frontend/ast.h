@@ -4,7 +4,7 @@
 
 enum AST_TYPE { AST_INTEGER, AST_ADD };
 
-typedef struct NODE {
+typedef struct AST_NODE {
   enum AST_TYPE type;
   char val;
 } AST_NODE;
