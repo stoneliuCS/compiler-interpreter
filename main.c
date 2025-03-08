@@ -7,7 +7,7 @@
 
 int main(int argc, char* argv[]) {
   if (argc == 1) {
-    runRepl();
+    run_repl();
   } else if (argc == 2) {
     printf("Compiling\n");
     const char* filePath = argv[1];

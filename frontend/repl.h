@@ -2,6 +2,6 @@
 
 #define REPL_H
 
-void runRepl();
+void run_repl();
 
 #endif
