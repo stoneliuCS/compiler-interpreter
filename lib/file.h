@@ -5,7 +5,6 @@
 /*
 * Header File for File Operation Abstractions.
 */
-
-GArray* readFile(const char* filePath);
+gchar* readFile(const char* filePath);
 
 #endif

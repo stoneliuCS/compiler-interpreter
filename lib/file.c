@@ -3,27 +3,21 @@
 #include <stdlib.h>
 #include <string.h>
 #include <glib.h>
+#include "file.h"
 
-// reads the file from the given filePath, returning a dynamically sized array.
+// Reads the file from the given filePath, returning a dynamically sized array.
 // The client caller is responsible for freeing the the memory allocated by this function.
-GArray* readFile(const char* filePath) {
+gchar* readFile(const char* filePath) {
 
-  FILE *file_ptr;
-  GArray* vector = g_array_new(FALSE, FALSE, sizeof(guint));
-  char ch;
-  file_ptr = fopen(filePath, "r");
+  gchar* contents = NULL;
+  gsize length = 0;
 
-  if (NULL == file_ptr) {
-    printf("file can't be opened \n");
-    return EXIT_FAILURE;
+  gboolean success = g_file_get_contents(filePath, &contents, &length, NULL);
+
+  if (success) {
+    return contents;
+  } else {
+    return NULL;
   }
-
-  while ((ch = fgetc(file_ptr)) != EOF) {
-    g_array_append_val(vector, ch);
-  }
-
-  fclose(file_ptr);
-
-  return vector;
 
 }
