@@ -11,7 +11,6 @@ gchar* readFile(const char* filePath) {
 
   gchar* contents = NULL;
   gsize length = 0;
-
   gboolean success = g_file_get_contents(filePath, &contents, &length, NULL);
 
   if (success) {
