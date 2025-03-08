@@ -10,8 +10,18 @@ static void test_create_ast(void) {
   };
   AST_NODE* node_ptr = &node;
   BIN_AST *ast = create_bin_ast(node_ptr);
+  ast->left = &(BIN_AST){
+    .node = &(AST_NODE){
+      .type = AST_INTEGER,
+      .val = '2'
+    },
+    .left = NULL,
+    .right = NULL
+  };
   CU_ASSERT(ast != NULL);
   CU_ASSERT(ast->node->val == '1');
+  CU_ASSERT(ast->left != NULL);
+  CU_ASSERT(ast->right == NULL);
 }
 
 static void test_simple_pass1(void) { CU_ASSERT_FATAL(1 == 1); }
