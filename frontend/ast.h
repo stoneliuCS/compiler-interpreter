@@ -2,38 +2,20 @@
 
 #define AST_H
 
-typedef struct AST AST;
+enum AST_TYPE { AST_INTEGER, AST_ADD };
 
-// A AST (Abstract Syntax Tree) is one of:
-// INTEGER 
-// ADD_OP
-// ADD_MUL
-struct AST {
-  // A Node is one of:
-  // Integer
-  // Addition (+)
-  // Multiplication (*)
-  enum { INTEGER, ADD_OP, MUL_OP } node;
+typedef struct NODE {
+  enum AST_TYPE type;
+  char val;
+} AST_NODE;
 
-  union {
+typedef struct BIN_AST {
+  struct NODE* node;
+  struct BIN_AST* left;
+  struct BIN_AST* right;
+} BIN_AST;
 
-    struct INTEGER {
-      int number;
-    } INTEGER;
-
-    struct ADD_OP {
-      AST *left; AST *right;
-    } ADD_OP;
-
-    struct ADD_MUL {
-      AST *left; AST *right;
-    } ADD_MUL;
-
-  } expr;
-
-};
-
-// Creates an an empty AST.
-AST* create_ast(AST ast);
+// Create a Binary AST
+BIN_AST *create_bin_ast(AST_NODE* root);
 
 #endif
