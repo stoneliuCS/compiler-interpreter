@@ -19,7 +19,7 @@ compile:
 	gcc $(CFLAGS) $(UFLAGS) $(SOURCE) -o main.o $(LFLAGS)
 
 test:
-	gcc $(CFLAGS) $(UFLAGS) $(TEST) -o test.o $(LFLAGS)
+	gcc $(CFLAGS) $(UFLAGS) $(TEST) -o test.o $(LFLAGS) && ./test.o
 
 clean:
-	rm -rf main.o
+	rm -rf *.o
