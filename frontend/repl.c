@@ -18,12 +18,10 @@ void run_repl() {
     if (!getline(&line, &size, stdin)) {
       return;
     }
-    char* stripped_line =  g_strstrip( line); // This is the string modified in place.
-    if (handle_exits(stripped_line)) {
-      free(line);
-      return;
-    }
-    tokenize(line);
+    char* stripped_line = g_strstrip( line); // This is the string modified in place.
+    if (handle_exits(stripped_line)) return;
+    tokenize(stripped_line);
+    free(line);
   }
 }
 

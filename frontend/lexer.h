@@ -4,12 +4,17 @@
 
 #define LEXER_H
 
+// KEYWORDS
+
+#define ASSIGNMENT = "<-"
+
 typedef enum STATEMENTS {
   SEMICOLON = ';',
   LEFT_PAREN = '(',
   RIGHT_PAREN = ')',
   WHITE_SPACE = ' ',
-  NEW_LINE = '\n'
+  NEW_LINE = '\n',
+  EQ = '=',
 } STATEMENTS;
 
 typedef struct tokenizer_operations {
