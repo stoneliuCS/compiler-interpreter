@@ -10,7 +10,7 @@ static void handle_alpha_numeric(const char c);
 GArray* tokenize(const char* source) {
   for (int i = 0; i < strlen(source); i++) {
     char c = source[i];
-    if (c == ' ' || c == '\n') continue; //Skip over any whitespace or new lines.
+    if (c == WHITE_SPACE || c == NEW_LINE) continue; //Skip over any whitespace or new lines.
     parser(c);
   }
   return NULL;
