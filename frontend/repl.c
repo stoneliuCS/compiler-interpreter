@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "lexer.h"
 
 static bool handle_exits(char *line);
 
@@ -17,12 +18,12 @@ void run_repl() {
     if (!getline(&line, &size, stdin)) {
       return;
     }
-    char* stripped_line =  g_strstrip(line);
+    char* stripped_line =  g_strstrip( line); // This is the string modified in place.
     if (handle_exits(stripped_line)) {
       free(line);
       return;
     }
-    printf("%s\n", line);
+    tokenize(line);
   }
 }
 

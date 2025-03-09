@@ -9,6 +9,9 @@ typedef struct AST_NODE {
   char val;
 } AST_NODE;
 
+// A Binary AST is one of:
+// { Val, Binary AST, Binary AST }
+// NULL
 typedef struct BIN_AST {
   struct AST_NODE* node;
   struct BIN_AST* left;
