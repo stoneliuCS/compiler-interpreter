@@ -11,7 +11,7 @@ UFLAGS = $(LIB_FLAGS) $(FRONTEND_FLAGS)
 LIB = $(CURDIR)/lib/*.c
 FRONTEND = $(CURDIR)/frontend/*.c
 SOURCE = main.c $(LIB) $(FRONTEND)
-TEST = $(LIB) $(FRONTEND) $(CURDIR)/tests/frontend/*.c
+TEST = $(LIB) $(FRONTEND) $(CURDIR)/tests/harness.c
 
 all: compile
 

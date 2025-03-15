@@ -28,7 +28,7 @@ static void parser(const char c) {
       printf("FOUND RIGHT_PAREN");
       break;
     case EQ:
-      printf("FOUND RIGHT_PAREN");
+      printf("FOUND EQUAL");
       break;
     default:
       handle_alpha_numeric(c);
