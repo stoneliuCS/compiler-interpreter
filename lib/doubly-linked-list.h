@@ -17,10 +17,10 @@ typedef struct LinkedListNode {
 // Mutates the underlying list to point the last node to the given node.
 void insert_node(LinkedListNode* list, LinkedListNode* node);
 
-// Finds the node at the given index in the list.
-void find_node(LinkedListNode* list, const int idx);
+// Finds the node at the given index (zero-indexed) in the list.
+LinkedListNode* find_node(LinkedListNode* list, const int idx);
 
-// Deletes the node at the given index in the list.
+// Deletes the node at the given (zero-indexed) index in the list.
 void delete_node(LinkedListNode* list, const int idx);
 
 // Returns the length of that linked list.

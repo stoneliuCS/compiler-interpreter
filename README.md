@@ -19,3 +19,8 @@ Run the executable by supplying command line arguments like so:
 ```bash
 ./main.o <FILE_PATH> # Or no arguments to run it in REPL mode.
 ```
+
+Compile and run the testing harness:
+```bash
+make test
+```

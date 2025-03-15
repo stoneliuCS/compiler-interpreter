@@ -7,6 +7,7 @@
 static void double_linked_list_tests(void) {
   CU_pSuite suite = CU_add_suite("Test Double Linked List", 0, 0);
   CU_add_test(suite, "test_insert_linked_list_node", test_insert_linked_list_node);
+  CU_add_test(suite, "test_find_node", test_find_node);
 }
 
 static void ast_tests(void) {
