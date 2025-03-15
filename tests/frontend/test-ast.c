@@ -2,6 +2,7 @@
 #include <CUnit/Automated.h>
 #include <CUnit/Basic.h>
 #include <CUnit/CUnit.h>
+#include <stdlib.h>
 
 static void test_create_ast(void) {
   AST_NODE node = {
@@ -22,4 +23,5 @@ static void test_create_ast(void) {
   CU_ASSERT(ast->node->val == '1');
   CU_ASSERT(ast->left != NULL);
   CU_ASSERT(ast->right == NULL);
+  free(ast);
 }

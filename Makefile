@@ -15,6 +15,15 @@ TEST = $(LIB) $(FRONTEND) $(CURDIR)/tests/harness.c
 
 all: compile run
 
+# FOR MACOS ONLY
+leak_test:
+	export MallocStackLogging=1
+	leaks --atExit -- ./test.o
+
+leak_main:
+	export MallocStackLogging=1
+	leaks --atExit -- ./main.o
+
 run:
 	./main.o
 

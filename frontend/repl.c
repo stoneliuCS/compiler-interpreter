@@ -1,11 +1,11 @@
 #include "repl.h"
 #include "glib.h"
+#include "lexer.h"
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "lexer.h"
 
 static bool handle_exits(char *line);
 
@@ -16,10 +16,15 @@ void run_repl() {
     size_t size;
     printf(">>> ");
     if (!getline(&line, &size, stdin)) {
+      free(line);
       return;
     }
-    char* stripped_line = g_strstrip( line); // This is the string modified in place.
-    if (handle_exits(stripped_line)) return;
+    char *stripped_line =
+        g_strstrip(line); // This is the string modified in place.
+    if (handle_exits(stripped_line)) {
+      free(line);
+      return;
+    }
     tokenize(stripped_line);
     free(line);
   }
