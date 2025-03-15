@@ -13,7 +13,10 @@ FRONTEND = $(CURDIR)/frontend/*.c
 SOURCE = main.c $(LIB) $(FRONTEND)
 TEST = $(LIB) $(FRONTEND) $(CURDIR)/tests/harness.c
 
-all: compile
+all: compile run
+
+run:
+	./main.o
 
 compile:
 	gcc $(CFLAGS) $(UFLAGS) $(SOURCE) -o main.o $(LFLAGS)
