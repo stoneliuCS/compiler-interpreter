@@ -5,50 +5,43 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <assert.h>
 
-static LinkedListNode* createLinkedList(void);
-
-static void test_insert_linked_list_node(void) {
-  LinkedListNode beginning = {NULL, NULL, "stone"};
-  LinkedListNode end = {NULL, NULL, "stone2"};
-  insert_node(&beginning, &end);
-  // Assert that the node inserted is not null.
-  CU_ASSERT_PTR_NOT_NULL(beginning.next);
-  // // Assert that nothing has been added to the beginning of the list.
-  CU_ASSERT_PTR_NULL(beginning.previous);
-  LinkedListNode* beginning_ptr = &beginning;
-  LinkedListNode* end_ptr = &end;
-  // // Assert that the end of the beginning ptr is the same as the end.
-  CU_ASSERT_EQUAL(beginning_ptr->next, end_ptr);
-  CU_ASSERT_EQUAL(end_ptr->previous, beginning_ptr);
-  CU_ASSERT_EQUAL(list_length(&beginning), 2);
-
-  // Lets get a little crazy and attach another linked list onto it.
-  LinkedListNode* list = createLinkedList();
-  // insert_node(&beginning,  list);
-  CU_ASSERT_EQUAL(list_length(list), 3);
-
-  insert_node(beginning_ptr, list);
-  CU_ASSERT_EQUAL(list_length(beginning_ptr), 5);
+// Returns a doubly linked list of exactly size 3.
+static LinkedListNode* construct_basic_linked_list(void) {
+  LinkedListNode* n1 = create_node(NULL, NULL, "1");
+  LinkedListNode* n2 = create_node(NULL, NULL, "2");
+  LinkedListNode* n3 = create_node(NULL, NULL, "3");
+  LinkedListNode* head = insert_node_at_idx(n3, n2, 0);
+  head = insert_node_at_idx(head, n1, 0);
+  assert(get_length_node(head) == 3);
+  return head;
 }
 
-static void test_find_node(void) {
-  LinkedListNode* list = createLinkedList();
-  LinkedListNode* first_node = find_node(list, 0);
-  CU_ASSERT_TRUE(strcmp(first_node->val, "1") == 0);
-  LinkedListNode* second_node = find_node(list, 1);
-  CU_ASSERT_TRUE(strcmp(second_node->val, "2") == 0);
-  LinkedListNode* third_node = find_node(list, 2);
-  CU_ASSERT_TRUE(strcmp(third_node->val, "3") == 0);
+static void test_insert_node_at_idx(void) {
+  LinkedListNode* n1 = create_node(NULL, NULL, "1");
+  LinkedListNode* n2 = create_node(NULL, NULL, "2");
+  LinkedListNode* head = insert_node_at_idx(n1, n2, 0);
+  CU_ASSERT(get_length_node(head) == 2);
+  CU_ASSERT_PTR_EQUAL(n2, find_node_at_idx(head, 0));
+  CU_ASSERT_PTR_EQUAL(n1, find_node_at_idx(head, 1));
 }
 
-static LinkedListNode* createLinkedList(void) {
-  // Lets try adding more
-  LinkedListNode n1 = { NULL, NULL, "1"};
-  LinkedListNode n2 = { NULL, NULL, "2"};
-  LinkedListNode n3 = { NULL, NULL, "3"};
-  insert_node(&n1, &n2);
-  insert_node(&n1, &n3);
-  LinkedListNode* list = &n1;
-  return list;
+static void test_get_linked_list_idx(void) {
+  LinkedListNode* head = construct_basic_linked_list();
+  LinkedListNode* n1 = find_node_at_idx(head, 0);
+  LinkedListNode* n2 = find_node_at_idx(head, 1);
+  LinkedListNode* n3 = find_node_at_idx(head, 2);
+  CU_ASSERT(n1 != NULL);
+  CU_ASSERT(n2 != NULL);
+  CU_ASSERT(n3 != NULL);
+  CU_ASSERT_TRUE(strcmp(n1->val, "1") == 0);
+  CU_ASSERT_TRUE(strcmp(n2->val, "2") == 0);
+  CU_ASSERT_TRUE(strcmp(n3->val, "3") == 0);
+}
+
+void run_double_linked_list_tests(void) {
+  CU_pSuite suite = CU_add_suite("Doubly Linked List Tests", 0, 0);
+  CU_add_test(suite, "testing geting linked list at idx", test_get_linked_list_idx);
+  CU_add_test(suite, "testing inserting node at idx.", test_insert_node_at_idx);
 }

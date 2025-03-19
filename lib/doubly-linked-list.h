@@ -13,18 +13,27 @@ typedef struct LinkedListNode {
   const char* val;
 } LinkedListNode;
 
-// Inserts the node at the back of the list.
-// Mutates the underlying list to point the last node to the given node.
-void insert_node(LinkedListNode* list, LinkedListNode* node);
+// Creates a LinkedListNode pointer in memory. Callers must be responsible for freeing it.
+LinkedListNode* create_node(LinkedListNode* previous, LinkedListNode* next, const char* val);
+
+// Frees the LinkedListNode.
+void free_node(LinkedListNode* head);
+
+// Inserts the node to the desired zero-indexed position. Returns the head of the new list.
+// The node will always be inserted behind the current index of the node in the original linked list.
+LinkedListNode* insert_node_at_idx(LinkedListNode* head, LinkedListNode* node, const int idx);
 
 // Finds the node at the given index (zero-indexed) in the list.
-LinkedListNode* find_node(LinkedListNode* list, const int idx);
+LinkedListNode* find_node_at_idx(LinkedListNode* head, const int idx);
 
 // Deletes the node at the given (zero-indexed) index in the list.
-void delete_node(LinkedListNode* list, const int idx);
+// Returns the head of the new list.
+LinkedListNode* delete_node_at_idx(LinkedListNode* head, const int idx);
 
-// Returns the length of that linked list.
-int list_length(LinkedListNode* list);
+// Pretty Prints the linked list head.
+void pretty_print_node(LinkedListNode* head);
+
+int get_length_node(LinkedListNode* head);
 
 #endif
 
