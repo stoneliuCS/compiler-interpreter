@@ -46,6 +46,11 @@ static LinkedListNode *insert_node_at_idx_impl(LinkedListNode *head,
   return walk_back(current);
 }
 
+LinkedListNode *delete_node_at_idx_impl(LinkedListNode* head, const int idx) {
+  // Not implemented yet.
+  assert(NULL);
+}
+
 LinkedListNode *create_node(LinkedListNode *previous, LinkedListNode *next,
                             const char *val) {
   LinkedListNode *node = malloc(sizeof(LinkedListNode));
@@ -101,4 +106,11 @@ LinkedListNode *insert_node_at_idx(LinkedListNode *head, LinkedListNode *node,
          "Cannot insert a node if the idx is greater the"
          "length of the list.");
   return insert_node_at_idx_impl(head, node, idx);
+}
+
+
+LinkedListNode* delete_node_at_idx(LinkedListNode* head, const int idx) {
+  assert(head != NULL && "Head pointer cannot be null.");
+  assert(idx < get_length_node(head));
+  return delete_node_at_idx_impl(head, idx);
 }
