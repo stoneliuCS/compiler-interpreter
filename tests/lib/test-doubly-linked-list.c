@@ -21,10 +21,15 @@ static LinkedListNode* construct_basic_linked_list(void) {
 static void test_insert_node_at_idx(void) {
   LinkedListNode* n1 = create_node(NULL, NULL, "1");
   LinkedListNode* n2 = create_node(NULL, NULL, "2");
+  LinkedListNode* n3 = create_node(NULL, NULL, "3");
   LinkedListNode* head = insert_node_at_idx(n1, n2, 0);
   CU_ASSERT(get_length_node(head) == 2);
   CU_ASSERT_PTR_EQUAL(n2, find_node_at_idx(head, 0));
   CU_ASSERT_PTR_EQUAL(n1, find_node_at_idx(head, 1));
+  head = insert_node_at_idx(head, n3, 1);
+  CU_ASSERT_PTR_EQUAL(n3, find_node_at_idx(head, 1));
+  CU_ASSERT_PTR_EQUAL(n1, find_node_at_idx(head, 2));
+  CU_ASSERT_PTR_EQUAL(n2, find_node_at_idx(head, 0));
 }
 
 static void test_get_linked_list_idx(void) {

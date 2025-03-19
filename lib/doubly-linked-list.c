@@ -57,7 +57,7 @@ LinkedListNode *create_node(LinkedListNode *previous, LinkedListNode *next,
 
 void free_node(LinkedListNode *head) {
   LinkedListNode *current = head;
-  while (current != NULL) {
+  while (current->next != NULL) {
     free(current);
     current = current->next;
   }
@@ -98,7 +98,7 @@ LinkedListNode *insert_node_at_idx(LinkedListNode *head, LinkedListNode *node,
   assert(head != NULL && "Head pointer cannot be null.");
   assert(node != NULL && "Node to be inserted cannot be null.");
   assert(idx < get_length_node(head) &&
-         "Cannot insert a node if the idx is greater than or equal to the "
+         "Cannot insert a node if the idx is greater the"
          "length of the list.");
   return insert_node_at_idx_impl(head, node, idx);
 }
