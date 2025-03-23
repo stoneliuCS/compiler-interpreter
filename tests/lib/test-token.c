@@ -10,6 +10,8 @@
 void test_create_token_list(void) {
   token_list_t* list = create_token_list(10);
   CU_ASSERT_PTR_NOT_NULL(list);
+  CU_ASSERT_EQUAL(get_token_list_capacity(list), 10);
+  CU_ASSERT_EQUAL(get_token_current_size(list), 0);
   free_token_list(list);
 }
 

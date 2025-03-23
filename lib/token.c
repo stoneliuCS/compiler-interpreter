@@ -45,3 +45,14 @@ void free_token_list(token_list_t* list) {
   free(list->tokens);
   free(list);
 }
+
+int get_token_list_capacity(token_list_t* list) {
+  assert(list != NULL);
+  return list->capacity;
+}
+
+
+int get_token_current_size(token_list_t* list) {
+  assert(list != NULL);
+  return list->size;
+}

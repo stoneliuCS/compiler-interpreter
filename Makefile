@@ -15,12 +15,7 @@ TEST = $(LIB) $(FRONTEND) $(CURDIR)/tests/harness.c
 
 all: compile run
 
-# FOR MACOS ONLY
-leak_test:
-	export MallocStackLogging=1
-	leaks --atExit -- ./test.o
-
-leak_main:
+leak:
 	export MallocStackLogging=1
 	leaks --atExit -- ./main.o
 
@@ -31,7 +26,7 @@ compile:
 	gcc $(CFLAGS) $(UFLAGS) $(SOURCE) -o main.o $(LFLAGS)
 
 test:
-	gcc $(CFLAGS) $(UFLAGS) $(TEST) -o test.o $(LFLAGS) && ./test.o
+	gcc $(CFLAGS) $(UFLAGS) $(TEST) -o test.o $(LFLAGS) && export MallocStackLogging=1 && leaks --atExit -- ./test.o
 
 clean:
 	rm -rf *.o

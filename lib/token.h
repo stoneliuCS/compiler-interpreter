@@ -39,4 +39,10 @@ void append(token_list_t* list, Token* token);
 // Frees all resources from the given token list.
 void free_token_list(token_list_t* list);
 
+// Gets the token list capacity.
+int get_token_list_capacity(token_list_t* list);
+
+// Gets the token_list current size
+int get_token_current_size(token_list_t* list);
+
 #endif
