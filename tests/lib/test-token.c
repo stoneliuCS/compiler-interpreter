@@ -17,7 +17,7 @@ static void test_create_token_list(void) {
 
 static void test_append(void) {
   token_list_t* list = create_token_list(10);
-  Token t1 = { ASSIGNMENT, "<-", NULL, 0 };
+  Token t1 = { SEMICOLON, ";", NULL, 1 };
   CU_ASSERT_EQUAL(get_token_list_capacity(list), 10);
   CU_ASSERT_EQUAL(get_token_current_size(list), 0);
   append_to_token_list(list, t1);

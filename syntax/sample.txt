@@ -1,3 +1,3 @@
-integer x <- 2;
-integer y <- 2;
-integer z <- x + y;
+var x <- 2;
+var y <- 2;
+var z <- x + y;
