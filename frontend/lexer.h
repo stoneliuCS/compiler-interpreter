@@ -1,5 +1,5 @@
 #include <glib.h>
-#include "../lib/array-list.h"
+#include "../lib/token-list.h"
 
 #ifndef LEXER_H 
 
@@ -35,7 +35,7 @@ typedef struct Error {
 } Error;
 
 // Tokenizes the source code into an Array of text.
-ArrayList* tokenize(const char* source);
+token_list_t* tokenize(const char* source);
 
 // Raises an error during runtime.
 void raise_error(Error* err);
