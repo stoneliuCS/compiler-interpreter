@@ -6,8 +6,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-static bool handle_exits(char *line);
-
 void run_repl() {
   printf("StoneScript v0.1 \n");
   while (true) {

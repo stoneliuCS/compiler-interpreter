@@ -14,9 +14,7 @@ static void scanToken(struct token_ctx ctx, char c);
 static void addToken(TokenType token_type);
 
 token_list_t *tokenize(const char *source) {
-  struct token_ctx ctx = {
-    0,0,1
-  };
+  struct token_ctx ctx = {0, 0, 1};
   for (int i = 0; i < strlen(source); i++) {
     const char c = source[i];
     ctx.current = ctx.start;
@@ -47,15 +45,15 @@ static void scanToken(struct token_ctx ctx, const char c) {
     addToken(SEMICOLON);
   case '*':
     addToken(STAR);
+  default:
+    raise_error(ctx.line, "Unexpected Character.");
   }
 }
 
-static void addToken(TokenType token_type) {
+static void addToken(TokenType token_type) {}
 
-}
-
-void raise_error(Error *err) {
+void raise_error(const int line, const char *msg) {
   printf("Encountered an error on line: ");
-  printf("%d", err->line_number);
-  printf("%s", err->line);
+  printf("%d", line);
+  printf("%s", msg);
 }
