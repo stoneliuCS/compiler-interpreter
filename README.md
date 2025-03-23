@@ -12,7 +12,7 @@ nix develop # In the root directory
 
 Compile the interpreter into an executable object file using:
 ```bash
-make
+make compile
 ```
 
 Run the executable by supplying command line arguments like so:
