@@ -17,7 +17,13 @@ typedef enum TokenType {
   SEMICOLON,
   SLASH,
   STAR,
-  ASSIGNMENT,
+  BANG,
+  NOT_BANG,
+  EQUAL,
+  LESS_THAN,
+  GREATER_THAN,
+  LESS_THAN_OR_EQUAL,
+  GREATER_THAN_OR_EQUAL
 } TokenType;
 
 // A Token is a structured data which knows its type, the lexeme, the literal value, and a line number.
