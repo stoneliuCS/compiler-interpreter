@@ -1,6 +1,5 @@
 #include "lexer.h"
 #include <assert.h>
-#include <ctype.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
@@ -12,12 +11,14 @@
 // The current line number
 // The current source program.
 // The current running list of tokens.
+// A flag to see if the source program has errors.
 typedef struct token_ctx {
   int start;
   int current;
   int line;
   const char *source;
   token_list_t *tokens;
+  bool error;
 } token_ctx;
 
 // Scans for the next token, consuming it.
@@ -115,23 +116,24 @@ static void scan_token(token_ctx ctx) {
   case '=':
     add_token(ctx, match(ctx, '=') ? EQUAL_EQUAL : EQUAL);
   default:
-    raise_error(ctx.line, "Unexpected Character.");
+    raise_error(ctx, "Unexpected Character.");
   }
 }
 
 static void add_token(token_ctx ctx, TokenType token_type) {}
 
 token_list_t *tokenize(const char *source) {
-  token_ctx ctx = {0, 0, 1, source, create_token_list(10)};
-  while (!is_end(ctx)) {
+  token_ctx ctx = {0, 0, 1, source, create_token_list(10), false};
+  while (!is_end(ctx) && !ctx.error) {
     reset(ctx);
     scan_token(ctx);
   }
   return ctx.tokens;
 }
 
-void raise_error(const int line, const char *msg) {
+void raise_error(token_ctx ctx, const char *msg) {
   printf("Encountered an error on line: ");
-  printf("%d", line);
+  printf("%d", ctx.line);
   printf("%s", msg);
+  ctx.error = true;
 }
