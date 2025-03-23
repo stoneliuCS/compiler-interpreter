@@ -20,10 +20,12 @@ typedef enum TokenType {
   BANG,
   NOT_BANG,
   EQUAL,
+  EQUAL_EQUAL,
   LESS_THAN,
   GREATER_THAN,
   LESS_THAN_OR_EQUAL,
-  GREATER_THAN_OR_EQUAL
+  GREATER_THAN_OR_EQUAL,
+  ASSIGNMENT
 } TokenType;
 
 // A Token is a structured data which knows its type, the lexeme, the literal value, and a line number.

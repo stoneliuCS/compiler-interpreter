@@ -11,34 +11,53 @@
 // A Current index
 // The current line number
 // The current source program.
+// The current running list of tokens.
 typedef struct token_ctx {
   int start;
   int current;
   int line;
-  const char* source;
+  const char *source;
+  token_list_t *tokens;
 } token_ctx;
 
-static void scanToken(token_ctx ctx, const char c);
-static void addToken(token_ctx ctx, TokenType token_type);
-static bool isAtEnd(token_ctx ctx);
+// Scans for the next token, consuming it.
+static void scan_token(token_ctx ctx);
+// Adds that token to the running context.
+static void add_token(token_ctx ctx, TokenType token_type);
+// Consumes the next token from the context and returns it.
+static char advance(token_ctx ctx);
+// Given the context of the tokens, checks whether or not we have reached the
+// end of the source program.
+static bool is_end(token_ctx ctx);
+// Peeks but does not consumes the next token.
+static char peek(token_ctx ctx);
+// Gets the current character from the source program.
+static char current(token_ctx ctx);
+// Does a conditional advance if the expected next char matches.
 static bool match(token_ctx ctx, const char expected_next_char);
+// Given that the next element is <, attempts to match either <, <-, or <=
+static void match_on_left_carrot(token_ctx ctx);
+// Increments the line counter in the context;
+static void increment_line(token_ctx ctx);
 
-token_list_t *tokenize(const char *source) {
-  token_ctx ctx = {0, 0, 1, source};
-  for (int i = 0; i < strlen(source); i++) {
-    const char c = source[i];
-    ctx.current = ctx.start;
-    scanToken(ctx, c);
-  }
-  return NULL;
+static void reset(token_ctx ctx) { ctx.start = ctx.current; }
+
+static char current(token_ctx ctx) { return ctx.source[ctx.current]; }
+
+static char advance(token_ctx ctx) { return ctx.source[ctx.current++]; }
+
+static char peek(token_ctx ctx) {
+  return is_end(ctx) ? '\0' : ctx.source[ctx.current + 1];
 }
 
-// Given the context of the tokens, checks whether or not we have reached the end of the 
-// source program.
-static bool isAtEnd(token_ctx ctx) { return ctx.current >= strlen(ctx.source); }
+static void increment_line(token_ctx ctx) {
+  ctx.line = ctx.line + 1;
+}
+
+static bool is_end(token_ctx ctx) { return ctx.current >= strlen(ctx.source); }
 
 static bool match(token_ctx ctx, const char expected_next_char) {
-  if (isAtEnd(ctx)) {
+  if (is_end(ctx)) {
     return false;
   } else if (ctx.source[ctx.current] != expected_next_char) {
     return false;
@@ -48,40 +67,70 @@ static bool match(token_ctx ctx, const char expected_next_char) {
   }
 }
 
-static void scanToken(token_ctx ctx, const char c) {
+static void match_on_left_carrot(token_ctx ctx) {
+  if (match(ctx, '=')) {
+    add_token(ctx, LESS_THAN_OR_EQUAL);
+  } else if (match(ctx, '-')) {
+    add_token(ctx, ASSIGNMENT);
+  } else {
+    add_token(ctx, LESS_THAN);
+  }
+}
+
+static void scan_token(token_ctx ctx) {
+  char c = advance(ctx);
   switch (c) {
+  case ' ':
+    break;
+  case '\r':
+    break;
+  case '\t':
+    break;
+  case '\n':
+    increment_line(ctx);
   case ('('):
-    addToken(ctx, LEFT_PAREN);
+    add_token(ctx, LEFT_PAREN);
   case (')'):
-    addToken(ctx, RIGHT_PAREN);
+    add_token(ctx, RIGHT_PAREN);
   case ('{'):
-    addToken(ctx, RIGHT_BRACE);
+    add_token(ctx, RIGHT_BRACE);
   case ('}'):
-    addToken(ctx, LEFT_BRACE);
+    add_token(ctx, LEFT_BRACE);
   case (','):
-    addToken(ctx, COMMA);
+    add_token(ctx, COMMA);
   case ('.'):
-    addToken(ctx, DOT);
+    add_token(ctx, DOT);
   case ('-'):
-    addToken(ctx, MINUS);
+    add_token(ctx, MINUS);
   case ('+'):
-    addToken(ctx, PLUS);
+    add_token(ctx, PLUS);
   case ';':
-    addToken(ctx, SEMICOLON);
+    add_token(ctx, SEMICOLON);
   case '*':
-    addToken(ctx, STAR);
+    add_token(ctx, STAR);
   case '!':
-    addToken(ctx, match(ctx, '=') ? NOT_BANG : BANG);
+    add_token(ctx, match(ctx, '=') ? NOT_BANG : BANG);
   case '<':
-    addToken(ctx, match(ctx, '=') ? LESS_THAN_OR_EQUAL : LESS_THAN);
+    match_on_left_carrot(ctx);
   case '>':
-    addToken(ctx, match(ctx, '=') ? GREATER_THAN_OR_EQUAL : GREATER_THAN);
+    add_token(ctx, match(ctx, '=') ? GREATER_THAN_OR_EQUAL : GREATER_THAN);
+  case '=':
+    add_token(ctx, match(ctx, '=') ? EQUAL_EQUAL : EQUAL);
   default:
     raise_error(ctx.line, "Unexpected Character.");
   }
 }
 
-static void addToken(token_ctx ctx, TokenType token_type) {
+static void add_token(token_ctx ctx, TokenType token_type) {}
+
+token_list_t *tokenize(const char *source) {
+  token_list_t *list = create_token_list(10);
+  token_ctx ctx = {0, 0, 1, source, list};
+  while (!is_end(ctx)) {
+    reset(ctx);
+    scan_token(ctx);
+  }
+  return NULL;
 }
 
 void raise_error(const int line, const char *msg) {
