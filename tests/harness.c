@@ -1,5 +1,5 @@
-#include "./frontend/test-ast.c"
 #include "./lib/test-doubly-linked-list.c"
+#include "./lib/test-token.c"
 #include "CUnit/CUError.h"
 #include "CUnit/TestDB.h"
 #include <CUnit/Automated.h>
@@ -8,6 +8,7 @@
 
 static void run_those_tests() {
   run_double_linked_list_tests();
+  run_token_tests();
 }
 
 int main() {

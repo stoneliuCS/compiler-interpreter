@@ -30,6 +30,9 @@ static void test_insert_node_at_idx(void) {
   CU_ASSERT_PTR_EQUAL(n3, find_node_at_idx(head, 1));
   CU_ASSERT_PTR_EQUAL(n1, find_node_at_idx(head, 2));
   CU_ASSERT_PTR_EQUAL(n2, find_node_at_idx(head, 0));
+  free(n1);
+  free(n2);
+  free(n3);
 }
 
 static void test_get_linked_list_idx(void) {
@@ -43,6 +46,9 @@ static void test_get_linked_list_idx(void) {
   CU_ASSERT_TRUE(strcmp(n1->val, "1") == 0);
   CU_ASSERT_TRUE(strcmp(n2->val, "2") == 0);
   CU_ASSERT_TRUE(strcmp(n3->val, "3") == 0);
+  free(n1);
+  free(n2);
+  free(n3);
 }
 
 void run_double_linked_list_tests(void) {

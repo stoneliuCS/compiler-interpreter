@@ -4,14 +4,15 @@
 #include <stdio.h>
 #include <string.h>
 
-void tokenize(const char* source) {
+token_list_t *tokenize(const char *source) {
   for (int i = 0; i < strlen(source); i++) {
     char c = source[i];
     printf("%c", c);
   }
+  return NULL;
 }
 
-void raise_error(Error* err) {
+void raise_error(Error *err) {
   printf("Encountered an error on line: ");
   printf("%d", err->line_number);
   printf("%s", err->line);
