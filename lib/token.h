@@ -18,7 +18,7 @@ typedef enum TokenType {
   SLASH,
   STAR,
   BANG,
-  NOT_BANG,
+  NOT_EQUAL,
   EQUAL,
   EQUAL_EQUAL,
   LESS_THAN,

@@ -5,7 +5,7 @@
 
 #define LEXER_H
 
-// Tokenizes the source code into an Array of text.
+// Tokenizes the source code into a token_list. 
 token_list_t* tokenize(const char* source);
 
 // Raises an error during runtime.

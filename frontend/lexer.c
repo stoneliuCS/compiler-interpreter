@@ -50,9 +50,7 @@ static char peek(token_ctx ctx) {
   return is_end(ctx) ? '\0' : ctx.source[ctx.current + 1];
 }
 
-static void increment_line(token_ctx ctx) {
-  ctx.line = ctx.line + 1;
-}
+static void increment_line(token_ctx ctx) { ctx.line = ctx.line + 1; }
 
 static bool is_end(token_ctx ctx) { return ctx.current >= strlen(ctx.source); }
 
@@ -109,7 +107,7 @@ static void scan_token(token_ctx ctx) {
   case '*':
     add_token(ctx, STAR);
   case '!':
-    add_token(ctx, match(ctx, '=') ? NOT_BANG : BANG);
+    add_token(ctx, match(ctx, '=') ? NOT_EQUAL : BANG);
   case '<':
     match_on_left_carrot(ctx);
   case '>':
@@ -124,13 +122,12 @@ static void scan_token(token_ctx ctx) {
 static void add_token(token_ctx ctx, TokenType token_type) {}
 
 token_list_t *tokenize(const char *source) {
-  token_list_t *list = create_token_list(10);
-  token_ctx ctx = {0, 0, 1, source, list};
+  token_ctx ctx = {0, 0, 1, source, create_token_list(10)};
   while (!is_end(ctx)) {
     reset(ctx);
     scan_token(ctx);
   }
-  return NULL;
+  return ctx.tokens;
 }
 
 void raise_error(const int line, const char *msg) {
