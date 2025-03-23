@@ -27,21 +27,17 @@ token_list_t *create_token_list(const int capacity) {
   return ptr;
 }
 
-void append(token_list_t* list, Token* token) {
+void append_to_token_list(token_list_t* list, Token token) {
   assert(list != NULL);
-  assert(token != NULL);
   if (list->capacity == list->size) {
     increase_size(list);
   } 
-  list->tokens[list->size] = token;
+  list->tokens[list->size] = &token;
   list->size = list->size + 1;
 }
 
 void free_token_list(token_list_t* list) {
   assert(list != NULL);
-  for (int i = 0; i < list->capacity; i++) {
-    free(list->tokens[i]);
-  }
   free(list->tokens);
   free(list);
 }

@@ -34,7 +34,7 @@ typedef struct Token {
 token_list_t* create_token_list(const int capacity);
 
 // Appends that token to the back of that token_list.
-void append(token_list_t* list, Token* token);
+void append_to_token_list(token_list_t* list, Token token);
 
 // Frees all resources from the given token list.
 void free_token_list(token_list_t* list);
