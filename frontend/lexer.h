@@ -1,5 +1,6 @@
 #include <glib.h>
-#include "../lib/token.h"
+#include "./token.h"
+#include "../lib/token-list.h"
 
 #ifndef LEXER_H 
 

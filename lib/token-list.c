@@ -1,6 +1,7 @@
 #include <stdlib.h>
-#include "../frontend/lexer.h"
 #include <assert.h>
+#include "../frontend/token.h"
+#include "./token-list.h"
 
 struct token_list {
   Token **tokens;

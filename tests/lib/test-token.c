@@ -1,4 +1,5 @@
-#include "../../lib/token.h"
+#include "../../frontend/token.h"
+#include "../../lib/token-list.h"
 #include <CUnit/Automated.h>
 #include <CUnit/Basic.h>
 #include <CUnit/CUnit.h>
