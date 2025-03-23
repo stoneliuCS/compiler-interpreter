@@ -1,5 +1,4 @@
 #include "repl.h"
-#include "glib.h"
 #include "lexer.h"
 #include <stdbool.h>
 #include <stddef.h>
@@ -16,24 +15,9 @@ void run_repl() {
     size_t size;
     printf(">>> ");
     if (!getline(&line, &size, stdin)) {
-      free(line);
       return;
     }
-    char *stripped_line =
-        g_strstrip(line); // This is the string modified in place.
-    if (handle_exits(stripped_line)) {
-      free(line);
-      return;
-    }
-    tokenize(stripped_line);
+    tokenize(line);
     free(line);
-  }
-}
-
-static bool handle_exits(char *line) {
-  if (strcmp(line, "exit") == 0) {
-    return true;
-  } else {
-    return false;
   }
 }

@@ -26,10 +26,6 @@ LinkedListNode* insert_node_at_idx(LinkedListNode* head, LinkedListNode* node, c
 // Finds the node at the given index (zero-indexed) in the list.
 LinkedListNode* find_node_at_idx(LinkedListNode* head, const int idx);
 
-// Deletes the node at the given (zero-indexed) index in the list.
-// Returns the head of the new list.
-LinkedListNode* delete_node_at_idx(LinkedListNode* head, const int idx);
-
 // Pretty Prints the linked list head.
 void pretty_print_node(LinkedListNode* head);
 

@@ -6,18 +6,15 @@
 #include "repl.h"
 #include "lexer.h"
 
+// Then entry point into the StoneScript Interpreter Runtime.
 int main(int argc, char* argv[]) {
-  if (argc == 1) {
-    run_repl();
-  } else if (argc == 2) {
-    printf("Compiling...\n");
-    const char* filePath = argv[1];
-    char* fileContents = readFile(filePath);
-    tokenize(fileContents);
-    g_free(fileContents);
-  } else {
-    printf("%s", "Too many arguments given, correct usage <EXECUTABLE_PATH> <FILE_PATH>\n");
+  if (argc > 2) {
+    printf("Usage: ss [script] \n");
     return 1;
+  } else if (argc == 2) {
+    const char* filePath = argv[1];
+  } else {
+    run_repl();
   }
   return 0;
 }
