@@ -5,7 +5,9 @@
 #include <string.h>
 
 #define FNV_OFFSET 14695981039346656037UL
-#define FNV_PRIME 1099511628211
+#define FNV_PRIME 1099511628211UL
+
+static uint64_t hash(const char* key);
 
 typedef struct {
   char* key;
@@ -26,6 +28,11 @@ token_map_t* create_token_map() {
   map->entries = calloc(map->capacity, sizeof(token_map_entry_t));
   assert(map->entries != NULL);
   return map;
+}
+
+Token token_map_get(token_map_t* map, const char* key) {
+  uint64_t hash_key = hash(key);
+  return NULL;
 }
 
 //FNV-1a hash implementation.
