@@ -19,4 +19,9 @@ Token token_map_get(token_map_t* map, const char* key);
 //Puts the key and the token value into the hashmap
 void token_map_put(token_map_t* map, const char* key, Token val);
 
+//Gets the current size of the map (Number of entries)
+int token_map_size(token_map_t* map);
+
+//Gets the current capacity of the map (Number of entries)
+int token_map_capacity(token_map_t* map);
 #endif

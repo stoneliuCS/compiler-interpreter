@@ -31,3 +31,13 @@ void free_token_map(token_map_t* map) {
   free(map->entries);
   free(map);
 }
+
+int token_map_size(token_map_t* map) {
+  assert(map != NULL);
+  return map->size;
+}
+
+int token_map_capacity(token_map_t* map) {
+  assert(map != NULL);
+  return map->capacity;
+}

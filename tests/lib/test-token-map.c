@@ -10,6 +10,8 @@
 void test_create_token_map(void) {
   token_map_t* map = create_token_map();
   CU_ASSERT_PTR_NOT_NULL(map);
+  CU_ASSERT_EQUAL(token_map_capacity(map), 16);
+  CU_ASSERT_EQUAL(token_map_size(map), 0);
   free_token_map(map);
 }
 
