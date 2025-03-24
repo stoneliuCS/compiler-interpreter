@@ -1,5 +1,6 @@
 #include "./lib/test-doubly-linked-list.c"
-#include "./lib/test-token.c"
+#include "./lib/test-token-list.c"
+#include "./lib/test-token-map.c"
 #include "CUnit/CUError.h"
 #include "CUnit/TestDB.h"
 #include <CUnit/Automated.h>
@@ -8,7 +9,8 @@
 
 static void run_those_tests() {
   run_double_linked_list_tests();
-  run_token_tests();
+  run_token_list_tests();
+  run_token_map_tests();
 }
 
 int main() {

@@ -27,7 +27,7 @@ static void test_append(void) {
   free_token_list(list);
 }
 
-void run_token_tests(void) {
+void run_token_list_tests(void) {
   CU_pSuite suite = CU_add_suite("Token Test Suites", 0, 0);
   CU_add_test(suite, "testing creating an empty token list.", test_create_token_list);
   CU_add_test(suite, "testing appending to a token list.", test_append);
