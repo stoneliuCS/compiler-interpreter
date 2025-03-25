@@ -14,7 +14,7 @@ token_map_t* create_token_map();
 void free_token_map(token_map_t* map);
 
 //Gets the token associated with the key
-Token token_map_get(token_map_t* map, const char* key);
+Token* token_map_get(token_map_t* map, const char* key);
 
 //Puts the key and the token value into the hashmap
 void token_map_put(token_map_t* map, const char* key, Token val);
