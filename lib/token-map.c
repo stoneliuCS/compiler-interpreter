@@ -32,7 +32,14 @@ token_map_t* create_token_map() {
 
 Token token_map_get(token_map_t* map, const char* key) {
   uint64_t hash_key = hash(key);
-  return NULL;
+  int index = hash_key & map->capacity - 1;
+  while (map->entries[index].key != NULL) {
+    if (strcmp(key, map->entries[index].key) == 0) {
+      return map->entries[index].val;
+    } else {
+      index = index >= map->capacity ? 0 : index + 1;
+    } 
+  }
 }
 
 //FNV-1a hash implementation.
