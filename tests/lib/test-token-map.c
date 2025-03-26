@@ -15,7 +15,15 @@ void test_create_token_map(void) {
   free_token_map(map);
 }
 
+void test_get_token_map(void) {
+  token_map_t* map = create_token_map();
+  Token* null_ptr = token_map_get(map, "nonexistant_key");
+  CU_ASSERT_PTR_NULL(null_ptr);
+  free_token_map(map);
+}
+
 void run_token_map_tests(void) {
   CU_pSuite suite = CU_add_suite("Token Map Test Suites", 0, 0);
   CU_add_test(suite, "testing creating an empty token list.", test_create_token_map);
+  CU_add_test(suite, "Testing getting token map.", test_get_token_map);
 }
