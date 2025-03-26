@@ -30,7 +30,11 @@ static void test_get_token_map_impl(token_map_t* map) {
 }
 
 static void test_set_token_map_impl(token_map_t* map) {
-
+  Token token = {SEMICOLON,";","", 1};
+  CU_ASSERT_EQUAL(token_map_size(map), 0);
+  CU_ASSERT_EQUAL(token_map_capacity(map), 16);
+  token_map_put(map, "1", &token);
+  CU_ASSERT_EQUAL(token_map_size(map), 1);
 }
 
 static void test_create_token_map(void) {
