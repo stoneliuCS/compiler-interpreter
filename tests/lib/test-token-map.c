@@ -16,32 +16,34 @@ static void token_compose_fn_impl(token_test_fn_t fn) {
   free_token_map(map);
 }
 
-static void test_create_token_map_impl(token_map_t* map) {
+static void test_create_token_map_impl(token_map_t *map) {
   CU_ASSERT_PTR_NOT_NULL(map);
   CU_ASSERT_EQUAL(token_map_capacity(map), 16);
   CU_ASSERT_EQUAL(token_map_size(map), 0);
 }
 
-static void test_get_token_map_impl(token_map_t* map) {
+static void test_get_token_map_impl(token_map_t *map) {
   Token *null_ptr = token_map_get(map, "nonexistent_key");
   CU_ASSERT_PTR_NULL(null_ptr);
   CU_ASSERT_EQUAL(token_map_capacity(map), 16);
   CU_ASSERT_EQUAL(token_map_size(map), 0);
 }
 
-static void test_set_token_map_impl(token_map_t* map) {
-  Token* token = create_token(ASSIGNMENT, "<-", "",  1);
+static void test_set_token_map_impl(token_map_t *map) {
+  Token *token = create_token(ASSIGNMENT, "<-", "", 1);
   CU_ASSERT_EQUAL(token_map_size(map), 0);
   CU_ASSERT_EQUAL(token_map_capacity(map), 16);
   token_map_put(map, "1", token);
   CU_ASSERT_EQUAL(token_map_size(map), 1);
-  Token* token_acc = token_map_get(map, "1");
+  Token *token_acc = token_map_get(map, "1");
   CU_ASSERT_PTR_EQUAL(token_acc, token);
-  Token* token2 = create_token(SEMICOLON, ";", "",  2);
+  Token *token2 = create_token(SEMICOLON, ";", "", 2);
   token_map_put(map, "2", token2);
   CU_ASSERT_EQUAL(token_map_size(map), 2);
-  Token* token_acc_2 = token_map_get(map, "2");
+  Token *token_acc_2 = token_map_get(map, "2");
   CU_ASSERT_PTR_EQUAL(token_acc_2, token2);
+  CU_ASSERT_EQUAL(token_map_capacity(map), 16);
+  CU_ASSERT_EQUAL(token_map_size(map), 2);
 }
 
 static void test_create_token_map(void) {

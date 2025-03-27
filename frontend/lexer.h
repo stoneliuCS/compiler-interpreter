@@ -1,6 +1,6 @@
-#include <glib.h>
 #include "./token.h"
 #include "../lib/token-list.h"
+#include "../lib/token-map.h"
 
 #ifndef LEXER_H 
 
@@ -13,6 +13,5 @@ token_list_t* tokenize(const char* source);
 
 // Raises an error during runtime.
 void raise_error(token_ctx ctx, const char* msg);
-
 
 #endif

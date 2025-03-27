@@ -1,6 +1,6 @@
-#ifndef TOKEN
+#ifndef TOKEN_H
 
-#define TOKEN
+#define TOKEN_H
 typedef enum TokenType {
   LEFT_PAREN,
   RIGHT_PAREN,
@@ -21,7 +21,11 @@ typedef enum TokenType {
   GREATER_THAN,
   LESS_THAN_OR_EQUAL,
   GREATER_THAN_OR_EQUAL,
-  ASSIGNMENT
+  ASSIGNMENT,
+  AND,
+  CLASS,
+  ELSE,
+  FALSE
 } TokenType;
 
 // A Token is a structured data which knows its type, the lexeme, the literal
@@ -36,4 +40,5 @@ typedef struct Token {
 // Creates a token.
 Token *create_token(TokenType type, char *lexeme, void *literal, int line);
 
+const char *match_token_type(TokenType type);
 #endif

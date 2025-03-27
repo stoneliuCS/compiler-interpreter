@@ -1,5 +1,6 @@
 #include "lexer.h"
 #include <assert.h>
+#include <glib.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
@@ -40,6 +41,8 @@ static bool match(token_ctx ctx, const char expected_next_char);
 static void match_on_left_carrot(token_ctx ctx);
 // Increments the line counter in the context;
 static void increment_line(token_ctx ctx);
+// Create the token table.
+static GHashTable *construct_token_table();
 
 static void reset(token_ctx ctx) { ctx.start = ctx.current; }
 

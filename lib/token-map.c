@@ -15,6 +15,7 @@ static uint64_t hash(const char *key);
 static void expand(token_map_t *map);
 // Gets the index from the hash implementation.
 static int get_index(token_map_t *map, const char *key);
+// Actual implementation of token_map_put
 static void token_map_put_impl(token_map_t *map, const char *key,
                                        Token *val);
 
@@ -45,7 +46,7 @@ static void expand(token_map_t *map) {
   for (int i = 0; i < map->capacity; i++) {
     token_map_entry_t entry = entries[i];
     if (entry.key != NULL) {
-      //
+      token_map_put_impl(map, entry.key, entry.val);
     }
   }
   free(map->entries);
