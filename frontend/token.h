@@ -24,12 +24,16 @@ typedef enum TokenType {
   ASSIGNMENT
 } TokenType;
 
-// A Token is a structured data which knows its type, the lexeme, the literal value, and a line number.
+// A Token is a structured data which knows its type, the lexeme, the literal
+// value, and a line number.
 typedef struct Token {
-  const TokenType type;
-  const char* lexeme;
-  const void* literal;
-  const int line;
+  TokenType type;
+  char *lexeme;
+  void *literal;
+  int line;
 } Token;
+
+// Creates a token.
+Token *create_token(TokenType type, char *lexeme, void *literal, int line);
 
 #endif

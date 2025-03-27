@@ -64,10 +64,14 @@ static void token_map_put_impl(token_map_t *map, const char *key,
   while (map->entries->key != NULL) {
     if (strcmp(map->entries[index].key, key) == 0) {
       map->entries[index].val = val;
+      return;
     } else {
       index = index >= map->capacity ? 0 : index + 1;
     }
   }
+  map->entries[index].key = (char*) key;
+  map->entries[index].val = val;
+  map->size = map->size + 1;
 }
 
 token_map_t *create_token_map() {
@@ -103,7 +107,7 @@ void token_map_put(token_map_t *map, const char *key, Token *val) {
 void free_token_map(token_map_t *map) {
   for (int i = 0; i < map->capacity; i++) {
     token_map_entry_t entry = map->entries[i];
-    free(entry.key);
+    free(entry.val);
   }
   free(map->entries);
   free(map);
